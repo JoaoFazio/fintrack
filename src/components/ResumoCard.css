@@ -1,0 +1,24 @@
+.resumo-card {
+    background-color: #1a1a1a;
+    border-radius: 12px;
+    padding: 24px;
+    border: 1px solid #2a2a2a;;
+    flex: 1;
+}
+
+.card-saldo {
+    font-size: 2rem;
+    color: white;
+    margin: 8px 0 0 0;
+}
+
+.card-titulo {
+    font-size: 0.9rem;
+    color: #9ca3af;
+    margin: 4px 0 0 0;
+    font-weight: 400;
+}
+
+.card-icone {
+    font-size: 1.5rem;
+}
