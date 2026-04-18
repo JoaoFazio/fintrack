@@ -1,0 +1,13 @@
+.filtros {
+    display: flex;
+    gap: 12px;
+}
+
+.filtro-btn {
+    border-radius: 12px;
+    padding: 4px;
+}
+
+.ativo {
+    background-color: #10B981;
+}
