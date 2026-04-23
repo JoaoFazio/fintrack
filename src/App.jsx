@@ -3,8 +3,10 @@ import ResumoCard from "./components/ResumoCard";
 import { useState } from "react";
 import Filtros from "./components/Filtros";
 import ListaTransacoes from "./components/ListaTransacoes/ListaTransacoes";
+import ModalNovaTransacao from "./components/ModalNovaTransacao";
 
 function App() {
+  const [modalAberto, setModalAberto] = useState(false);
   const [categoriaSelecionada, setCategoriaSelecionada] = useState("Todos");
   const [transacoes, setTransacoes] = useState([
     {
@@ -24,6 +26,10 @@ function App() {
       data: "2025-04-01",
     },
   ]);
+
+  function adicionarTransacao(novaTransacao) {
+    setTransacoes([...transacoes, novaTransacao]);
+  }
 
   return (
     <div>
@@ -45,6 +51,16 @@ function App() {
           transacoes={transacoes}
           categoriaSelecionada={categoriaSelecionada}
         />
+      </div>
+
+      <div>
+        <button onClick={() => setModalAberto(true)}>+</button>
+        {modalAberto && (
+          <ModalNovaTransacao
+            onFechar={() => setModalAberto(false)}
+            onAdicionarTransacao={adicionarTransacao}
+          />
+        )}
       </div>
     </div>
   );
