@@ -1,16 +1,36 @@
-# React + Vite
+# Fintrack 💰
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicativo pessoal de controle financeiro construído com React.
 
-Currently, two official plugins are available:
+## Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+[fintrack-phi-gilt.vercel.app](https://fintrack-phi-gilt.vercel.app)
 
-## React Compiler
+## Funcionalidades
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Registro de transações de entrada e saída
+- Filtro por categoria
+- Resumo automático de saldo, entradas e saídas
+- Persistência de dados com localStorage
+- Interface dark mode
 
-## Expanding the ESLint configuration
+## Tecnologias
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React + Vite
+- CSS puro
+- localStorage para persistência
+
+## Como rodar localmente
+
+```bash
+npm install
+npm run dev
+```
+
+## Estrutura de componentes
+
+- `ResumoCard` — cards de resumo financeiro reutilizáveis
+- `Filtros` — filtros de categoria com estado ativo
+- `ListaTransacoes` — lista filtrada de transações
+- `ItemTransacao` — item individual da lista
+- `ModalNovaTransacao` — formulário de nova transação
