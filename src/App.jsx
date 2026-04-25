@@ -13,7 +13,7 @@ function App() {
       id: "1",
       descricao: "iFood",
       valor: 45.9,
-      tipo: "saida",
+      tipo: "Saída",
       categoria: "Alimentação",
       data: "2026-04-16",
     },
@@ -21,7 +21,7 @@ function App() {
       id: "2",
       descricao: "Bolsa LabMulti",
       valor: 1200,
-      tipo: "entrada",
+      tipo: "Entrada",
       categoria: "Outros",
       data: "2025-04-01",
     },
@@ -31,12 +31,20 @@ function App() {
     setTransacoes([...transacoes, novaTransacao]);
   }
 
+  const totalEntradas = transacoes
+    .filter((t) => t.tipo === "Entrada")
+    .reduce((total, t) => total + t.valor, 0);
+  const totalSaidas = transacoes
+    .filter((t) => t.tipo === "Saída")
+    .reduce((total, t) => total + t.valor, 0);
+  const saldo = totalEntradas - totalSaidas;
+
   return (
     <div>
       <div className="cards-container">
-        <ResumoCard titulo={"Saldo Atual"} icone={"💰"} valor={12450} />
-        <ResumoCard titulo="Total de Entradas" icone={"📈"} valor={562450} />
-        <ResumoCard titulo="Total de Saídas" icone={"📉"} valor={12450} />
+        <ResumoCard titulo={"Saldo Atual"} icone={"💰"} valor={saldo} />
+        <ResumoCard titulo="Total de Entradas" icone={"📈"} valor={totalEntradas} />
+        <ResumoCard titulo="Total de Saídas" icone={"📉"} valor={totalSaidas} />
       </div>
 
       <div className="filtros">
