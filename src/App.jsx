@@ -56,7 +56,7 @@ function App() {
       </div>
 
       <div>
-        <button onClick={() => setModalAberto(true)}>+</button>
+        <button className="btn-adicionar" onClick={() => setModalAberto(true)}>+</button>
         {modalAberto && (
           <ModalNovaTransacao
             onFechar={() => setModalAberto(false)}

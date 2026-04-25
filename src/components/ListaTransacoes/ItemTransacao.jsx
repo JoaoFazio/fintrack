@@ -1,15 +1,31 @@
-function ItemTransacao ({transacao}) {
-    return (
-        <div className="item-transacao">
-            <span>{transacao.descricao}</span>
-            <span>{"💸"}</span>
-            <div>
-                <p>{transacao.data}</p>
-                <p>{transacao.categoria}</p>
-            </div>
-            <p>{transacao.valor}</p>
+import "./ItemTransacao.css";
+
+function ItemTransacao({ transacao }) {
+  return (
+    <div className="item-transacao">
+      <div className="item-esquerda">
+        <span>{"💸"}</span>
+        <div className="item-info">
+          <p>{transacao.descricao}</p>
+          <p>
+            {transacao.data} • {transacao.categoria}
+          </p>
         </div>
-    )
+      </div>
+      <p
+        className={
+          transacao.tipo === "Entrada"
+            ? "item-valor entrada"
+            : "item-valor saida"
+        }
+      >
+        {transacao.valor.toLocaleString("pt-BR", {
+          style: "currency",
+          currency: "BRL",
+        })}
+      </p>
+    </div>
+  );
 }
 
-export default ItemTransacao
+export default ItemTransacao;
