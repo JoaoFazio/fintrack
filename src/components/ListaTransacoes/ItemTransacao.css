@@ -1,0 +1,23 @@
+.item-transacao {
+    background-color: #201f1f;
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.entrada {
+    color: #4edea3;
+}
+
+.saida {
+    color: #ff7886;
+}
+
+.item-esquerda {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
