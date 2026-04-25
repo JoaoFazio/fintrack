@@ -30,15 +30,26 @@ function App() {
   const saldo = totalEntradas - totalSaidas;
 
   return (
-    <div>
+    <div className="app-container">
       <div className="cards-container">
-        <ResumoCard titulo={"Saldo Atual"} icone={"💰"} valor={saldo} />
+        <ResumoCard
+          titulo={"Saldo Atual"}
+          icone={"💰"}
+          valor={saldo}
+          corIcone={"#1f3d2e"}
+        />
         <ResumoCard
           titulo="Total de Entradas"
           icone={"📈"}
           valor={totalEntradas}
+          corIcone={"#1f3d2e"}
         />
-        <ResumoCard titulo="Total de Saídas" icone={"📉"} valor={totalSaidas} />
+        <ResumoCard
+          titulo="Total de Saídas"
+          icone={"📉"}
+          valor={totalSaidas}
+          corIcone={"#3d1f24"}
+        />
       </div>
 
       <div className="filtros">
@@ -56,7 +67,9 @@ function App() {
       </div>
 
       <div>
-        <button className="btn-adicionar" onClick={() => setModalAberto(true)}>+</button>
+        <button className="btn-adicionar" onClick={() => setModalAberto(true)}>
+          +
+        </button>
         {modalAberto && (
           <ModalNovaTransacao
             onFechar={() => setModalAberto(false)}

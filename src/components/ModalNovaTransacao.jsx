@@ -30,11 +30,22 @@ function ModalNovaTransacao({ onFechar, onAdicionarTransacao }) {
           type="text"
           placeholder="R$ 0.00"
           value={valor}
-            onChange={(e) => setValor(e.target.value)}
+          onChange={(e) => setValor(e.target.value)}
         />
         <div className="overlay-tipo">
-          <button onClick={() => setTipo("Entrada")}>Entrada</button>
-          <button onClick={() => setTipo("Saída")}>Saída</button>
+          <button
+            className={tipo === "Entrada" ? "tipo-btn ativo" : "tipo-btn"}
+            onClick={() => setTipo("Entrada")}
+          >
+            Entrada
+          </button>
+
+          <button
+            className={tipo === "Saída" ? "tipo-btn ativo" : "tipo-btn"}
+            onClick={() => setTipo("Saída")}
+          >
+            Saída
+          </button>
         </div>
         <div className="overlay-descricao">
           <p>Descrição</p>
@@ -46,25 +57,31 @@ function ModalNovaTransacao({ onFechar, onAdicionarTransacao }) {
           />
         </div>
         <div className="overlay-dados">
-          <p>Categoria</p>
-          <select
-            name="Categoria"
-            id=""
-            value={categoria}
-            onChange={(e) => setCategoria(e.target.value)}
-          >
-            <option value="Alimentação">Alimentação</option>
-            <option value="Lazer">Lazer</option>
-            <option value="Transporte">Transporte</option>
-            <option value="Compras">Compras</option>
-            <option value="Outros">Outros</option>
-          </select>
-          <input
-            type="date"
-            value={data}
-            onChange={(e) => setData(e.target.value)}
-          />
+          <div>
+            <p>Categoria</p>
+            <select
+              name="Categoria"
+              id=""
+              value={categoria}
+              onChange={(e) => setCategoria(e.target.value)}
+            >
+              <option value="Alimentação">Alimentação</option>
+              <option value="Lazer">Lazer</option>
+              <option value="Transporte">Transporte</option>
+              <option value="Compras">Compras</option>
+              <option value="Outros">Outros</option>
+            </select>
+          </div>
+          <div>
+            <p>Data</p>
+            <input
+              type="date"
+              value={data}
+              onChange={(e) => setData(e.target.value)}
+            />
+          </div>
         </div>
+
         <div className="buttons">
           <button onClick={salvar}>Salvar</button>
           <button onClick={onFechar}>Cancelar</button>

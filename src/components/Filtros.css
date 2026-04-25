@@ -4,8 +4,13 @@
 }
 
 .filtro-btn {
-    border-radius: 12px;
-    padding: 4px;
+    border-radius: 20px;
+    padding: 8px 16px;
+    border: 1px solid #2a2a2a;
+    background-color: transparent;
+    color: #e5e2e1;
+    cursor: pointer;
+    font-size: 0.9rem;
 }
 
 .ativo {
