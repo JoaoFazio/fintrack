@@ -26,3 +26,14 @@
     margin: 0 auto;
     padding: 24px;
 }
+
+.titulo {
+    font-size: 2.5rem;
+    color: #10B981;
+    margin-bottom: 8px;
+}
+
+.hora-atual {
+    font-size: 1.25rem;
+    color: #6B7280;
+}

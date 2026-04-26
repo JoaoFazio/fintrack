@@ -6,6 +6,7 @@ import ModalNovaTransacao from "./components/ModalNovaTransacao";
 import { useState, useEffect } from "react";
 
 function App() {
+  const [horaAtual, setHoraAtual] = useState(new Date());
   const [modalAberto, setModalAberto] = useState(false);
   const [categoriaSelecionada, setCategoriaSelecionada] = useState("Todos");
   const [transacoes, setTransacoes] = useState(() => {
@@ -29,8 +30,21 @@ function App() {
     .reduce((total, t) => total + t.valor, 0);
   const saldo = totalEntradas - totalSaidas;
 
+  useEffect(() => {
+    const intervalo = setInterval(() => {
+      setHoraAtual(new Date());
+    }, 1000);
+
+    return () => clearInterval(intervalo);
+  }, []);
+
+
   return (
     <div className="app-container">
+      <div>
+        <h1 className="titulo">FinTrack</h1>
+        <p className="hora-atual">{horaAtual.toLocaleTimeString('pt-BR', {hour: 'numeric', minute: 'numeric'})}</p>
+      </div>
       <div className="cards-container">
         <ResumoCard
           titulo={"Saldo Atual"}
