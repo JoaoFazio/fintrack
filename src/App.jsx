@@ -9,10 +9,12 @@ function App() {
     <BrowserRouter>
       <div className="flex">
         <Sidebar />
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/history" element={<History />} />
-        </Routes>
+        <div className="flex-1 overflow-y-auto">
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/history" element={<History />} />
+          </Routes>
+        </div>
       </div>
     </BrowserRouter>
   );
