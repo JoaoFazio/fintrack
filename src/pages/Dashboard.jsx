@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { useTransactions } from "../context/TransactionContext";
+import { PieChart, Pie, Tooltip, Cell } from "recharts";
 
 export default function Dashboard() {
   const { transactions } = useTransactions();
@@ -14,6 +15,18 @@ export default function Dashboard() {
   const balance = income - expense;
 
   const recentTransactions = transactions.slice(-5);
+  const chartData = Object.entries(
+    transactions
+      .filter((t) => t.type === "expense")
+      .reduce((acc, t) => {
+        if (acc[t.catId]) {
+          acc[t.catId] += t.amount;
+        } else {
+          acc[t.catId] = t.amount;
+        }
+        return acc;
+      }, {}),
+  ).map(([name, value]) => ({ name, value }));
 
   return (
     <div className="p-6">
@@ -32,6 +45,18 @@ export default function Dashboard() {
           <p className="text-expense text-2xl font-bold">{expense}</p>
         </div>
       </div>
+      <PieChart width={400} height={400}>
+        <Pie
+          data={chartData}
+          dataKey="value"
+          nameKey={"name"}
+          cx="50%"
+          cy="50%"
+          innerRadius="50%"
+          fill="#8884d8"
+          stroke="white"
+        />
+      </PieChart>
       <div>
         <ul>
           {recentTransactions.map((t) => (
