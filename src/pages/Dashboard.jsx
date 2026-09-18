@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { useTransactions } from "../context/TransactionContext";
-import { PieChart, Pie, Tooltip, Cell } from "recharts";
+import { PieChart, Pie, Tooltip, Cell, BarChart, Bar, XAxis, YAxis } from "recharts";
 
 export default function Dashboard() {
   const { transactions } = useTransactions();
@@ -27,6 +27,23 @@ export default function Dashboard() {
         return acc;
       }, {}),
   ).map(([name, value]) => ({ name, value }));
+
+  const monthlyData = Object.entries(
+    transactions.reduce((acc, t) => {
+      const month = t.date.slice(0, 7);
+
+      if (!acc[month]) {
+        acc[month] = { income: 0, expense: 0 };
+      }
+
+      if (t.type === "income") {
+        acc[month].income += t.amount;
+      } else {
+        acc[month].expense += t.amount;
+      }
+      return acc;
+    }, {}),
+  ).map(([month, values]) => ({ month, ...values }));
 
   return (
     <div className="p-6">
@@ -57,6 +74,13 @@ export default function Dashboard() {
           stroke="white"
         />
       </PieChart>
+      <BarChart width={500} height={300} data={monthlyData}>
+        <XAxis dataKey="month" />
+        <YAxis />
+        <Tooltip />
+        <Bar dataKey="income" fill="#1fd990" />
+        <Bar dataKey="expense" fill="#f0405e" />
+      </BarChart>
       <div>
         <ul>
           {recentTransactions.map((t) => (
