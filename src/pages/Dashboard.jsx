@@ -1,6 +1,16 @@
 import { Outlet } from "react-router-dom";
 import { useTransactions } from "../context/TransactionContext";
-import { PieChart, Pie, Tooltip, Cell, BarChart, Bar, XAxis, YAxis } from "recharts";
+import {
+  PieChart,
+  Pie,
+  Tooltip,
+  Cell,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+} from "recharts";
+import TransactionItem from "../components/TransactionItem";
 
 export default function Dashboard() {
   const { transactions } = useTransactions();
@@ -84,11 +94,7 @@ export default function Dashboard() {
       <div>
         <ul>
           {recentTransactions.map((t) => (
-            <li key={t.id} className="bg-surface p-4 rounded-lg">
-              <span>{t.desc}</span>
-              <span>{t.date}</span>
-              <span>{t.amount}</span>
-            </li>
+            <TransactionItem key={t.id} transaction={t} />
           ))}
         </ul>
       </div>
