@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import { CATEGORIES } from "../constants/categories";
+import TransactionItem from "../components/TransactionItem";
+import { useTransactions } from "../context/TransactionContext";
 
 export default function History() {
   const [month, setMonth] = useState("");
@@ -11,6 +13,11 @@ export default function History() {
       {category.name}
     </option>
   ));
+  const { transactions } = useTransactions();
+  const filtered = transactions
+    .filter((t) => month === "" || t.date.startsWith(month))
+    .filter((t) => category === "" || t.catId === category)
+    .filter((t) => type === "" || t.type === type);
 
   return (
     <div>
@@ -43,6 +50,11 @@ export default function History() {
       >
         Despesas
       </button>
+      <div>
+        {filtered.map((t) => (
+          <TransactionItem key={t.id} transaction={t} />
+        ))}
+      </div>
       <Outlet />
     </div>
   );
