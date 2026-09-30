@@ -1,7 +1,7 @@
-import { createContext, useReducer } from "react";
+import { createContext, useReducer, useState } from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { useEffect } from "react";
-import { useContext } from "react"
+import { useContext } from "react";
 
 export const TransactionContext = createContext(null);
 
@@ -21,17 +21,20 @@ function transactionReducer(state, action) {
 export function TransactionProvider({ children }) {
   const [stored, setStored] = useLocalStorage("transactions", []);
   const [transactions, dispatch] = useReducer(transactionReducer, stored);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   useEffect(() => {
     setStored(transactions);
   }, [transactions]);
 
   return (
-    <TransactionContext.Provider value={{ transactions, dispatch }}>
+    <TransactionContext.Provider
+      value={{ transactions, dispatch, isModalOpen, setIsModalOpen }}
+    >
       {children}
     </TransactionContext.Provider>
   );
 }
 
 export function useTransactions() {
-  return useContext(TransactionContext)
+  return useContext(TransactionContext);
 }
