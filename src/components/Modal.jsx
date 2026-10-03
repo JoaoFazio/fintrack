@@ -1,5 +1,6 @@
-import { useState } from "react";
 import { useTransactions } from "../context/TransactionContext";
+import { CATEGORIES } from "../constants/categories";
+import { useState } from "react";
 
 function Modal() {
   const { isModalOpen, setIsModalOpen } = useTransactions();
@@ -7,6 +8,17 @@ function Modal() {
   const [desc, setDesc] = useState("");
   const [amount, setAmount] = useState(0);
   const [date, setDate] = useState("");
+  const [catId, setCatId] = useState(null);
+  const listCategories = CATEGORIES.map((category) => (
+    <button
+      className={`p-2 rounded-lg ${catId === category.id ? "bg-surface-hi text-t1" : "text-t2"}`}
+      key={category.id}
+      value={category.id}
+      onClick={(e) => setCatId(e.target.value)}
+    >
+      {category.name} {category.emoji}
+    </button>
+  ));
 
   if (!isModalOpen) return null;
 
@@ -16,7 +28,7 @@ function Modal() {
       onClick={() => setIsModalOpen(false)}
     >
       <div
-        className="bg-surface p-6 rounded-lg"
+        className="bg-surface p-6 rounded-lg flex flex-col gap-3 min-w-96"
         onClick={(e) => e.stopPropagation()}
       >
         <button onClick={() => setIsModalOpen(false)}>X</button>
@@ -52,6 +64,9 @@ function Modal() {
         >
           Despesa
         </button>
+        <div className="flex flex-wrap gap-2">
+          {type === "expense" && listCategories}
+        </div>
       </div>
     </div>
   );
