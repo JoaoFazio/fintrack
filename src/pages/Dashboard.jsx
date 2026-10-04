@@ -1,4 +1,3 @@
-import { Outlet } from "react-router-dom";
 import { useTransactions } from "../context/TransactionContext";
 import {
   PieChart,
@@ -26,6 +25,7 @@ export default function Dashboard() {
   const balance = income - expense;
 
   const recentTransactions = transactions.slice(-5);
+
   const chartData = Object.entries(
     transactions
       .filter((t) => t.type === "expense")
@@ -37,16 +37,17 @@ export default function Dashboard() {
         }
         return acc;
       }, {}),
-  ).map(([name, value]) => ({ name, value }));
+  ).map(([catId, value]) => {
+    const cat = CATEGORIES.find((c) => c.id === catId);
+    return { name: cat?.name ?? catId, value, catId };
+  });
 
   const monthlyData = Object.entries(
     transactions.reduce((acc, t) => {
       const month = t.date.slice(0, 7);
-
       if (!acc[month]) {
         acc[month] = { income: 0, expense: 0 };
       }
-
       if (t.type === "income") {
         acc[month].income += t.amount;
       } else {
@@ -55,6 +56,7 @@ export default function Dashboard() {
       return acc;
     }, {}),
   ).map(([month, values]) => ({ month, ...values }));
+
   const formattedBalance = Number(balance).toLocaleString("pt-BR", {
     style: "currency",
     currency: "BRL",
@@ -107,10 +109,18 @@ export default function Dashboard() {
               outerRadius="80%"
             >
               {chartData.map((entry, index) => {
-                const cat = CATEGORIES.find((c) => c.id === entry.name);
+                const cat = CATEGORIES.find((c) => c.id === entry.catId);
                 return <Cell key={index} fill={cat?.color ?? "#7070a0"} />;
               })}
             </Pie>
+            <Tooltip
+              contentStyle={{
+                backgroundColor: "#1c1c26",
+                border: "none",
+                borderRadius: "8px",
+                color: "#e8e8f0",
+              }}
+            />
           </PieChart>
         </div>
         <div className="bg-surface p-4 rounded-lg flex-1">
@@ -120,7 +130,6 @@ export default function Dashboard() {
           <BarChart width={400} height={280} data={monthlyData}>
             <XAxis dataKey="month" tick={{ fill: "#7070a0", fontSize: 12 }} />
             <YAxis tick={{ fill: "#7070a0", fontSize: 12 }} />
-
             <Bar dataKey="income" fill="#1fd990" radius={[4, 4, 0, 0]} />
             <Bar dataKey="expense" fill="#f0405e" radius={[4, 4, 0, 0]} />
           </BarChart>

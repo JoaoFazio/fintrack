@@ -1,16 +1,34 @@
-# React + Vite
+# Fintrack v2
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+App de finanças pessoais para controle de receitas e despesas, com gráficos e histórico filtrado.
 
-Currently, two official plugins are available:
+## Preview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+> Screenshot aqui depois do deploy
 
-## React Compiler
+## Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React + Vite
+- Tailwind CSS v4
+- React Router v6
+- Recharts
+- Context API + useReducer
+- localStorage
 
-## Expanding the ESLint configuration
+## Funcionalidades
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Adicionar receitas e despesas por categoria
+- Dashboard com saldo, gráfico donut por categoria e gráfico de barras mensal
+- Histórico com filtros por mês, categoria e tipo
+- Persistência de dados no localStorage
+
+## Como rodar
+
+```bash
+npm install
+npm run dev
+```
+
+## Autor
+
+João Gabriel Fazio — [github.com/JoaoFazio](https://github.com/JoaoFazio)
