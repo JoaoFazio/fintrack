@@ -51,9 +51,9 @@ export default function History() {
         Despesas
       </button>
       <div>
-        {filtered.map((t) => (
-          <TransactionItem key={t.id} transaction={t} />
-        ))}
+        {filtered.length === 0
+          ? "Nenhuma transação recente."
+          : filtered.map((t) => <TransactionItem key={t.id} transaction={t} />)}
       </div>
       <Outlet />
     </div>

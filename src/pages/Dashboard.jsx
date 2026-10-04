@@ -93,9 +93,11 @@ export default function Dashboard() {
       </BarChart>
       <div>
         <ul>
-          {recentTransactions.map((t) => (
-            <TransactionItem key={t.id} transaction={t} />
-          ))}
+          {recentTransactions.length === 0
+            ? "Nenhuma transação recente."
+            : recentTransactions.map((t) => (
+                <TransactionItem key={t.id} transaction={t} />
+              ))}
         </ul>
       </div>
       <Outlet />
