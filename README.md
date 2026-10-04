@@ -4,7 +4,9 @@ App de finanças pessoais para controle de receitas e despesas, com gráficos e 
 
 ## Preview
 
-> https://fintrack-v2-neon.vercel.app/
+![Fintrack Dashboard](./preview.png)
+
+🔗 [Ver app ao vivo](https://fintrack-v2-neon.vercel.app)
 
 ## Stack
 
