@@ -3,7 +3,7 @@ import { CATEGORIES } from "../constants/categories";
 import { useState } from "react";
 
 function Modal() {
-  const { isModalOpen, setIsModalOpen } = useTransactions();
+  const { isModalOpen, setIsModalOpen, dispatch } = useTransactions();
   const [type, setType] = useState("income");
   const [desc, setDesc] = useState("");
   const [amount, setAmount] = useState(0);
@@ -19,6 +19,23 @@ function Modal() {
       {category.name} {category.emoji}
     </button>
   ));
+
+  function handlesubmit(e) {
+    e.preventDefault();
+
+    const transaction = {
+      id: Date.now().toString(),
+      type,
+      desc,
+      amount: Number(amount),
+      date,
+      catId,
+    };
+
+    dispatch({ type: "ADD_TRANSACTION", payload: transaction });
+
+    setIsModalOpen(false);
+  }
 
   if (!isModalOpen) return null;
 
@@ -67,6 +84,7 @@ function Modal() {
         <div className="flex flex-wrap gap-2">
           {type === "expense" && listCategories}
         </div>
+        <button onClick={handlesubmit}>Confirmar</button>
       </div>
     </div>
   );
