@@ -9,9 +9,9 @@ function App() {
   return (
     <BrowserRouter>
       <Modal />
-      <div className="flex">
+      <div className="flex bg-bg min-h-screen">
         <Sidebar />
-        <div className="flex-1 overflow-y-auto">
+        <div className="flex-1 overflow-y-auto bg-bg">
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/history" element={<History />} />
