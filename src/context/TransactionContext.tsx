@@ -58,5 +58,10 @@ export function TransactionProvider({ children }: { children: ReactNode }) {
 }
 
 export function useTransactions() {
-  return useContext(TransactionContext);
+  const usingTransaction = useContext(TransactionContext);
+  
+  if (!usingTransaction) {
+    throw new Error("useTransaction must be used within the TransactionProvider.")
+  }
+  return usingTransaction
 }
