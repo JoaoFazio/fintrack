@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useContext } from "react";
 
 export const TransactionContext = createContext<TransactionContextType | null>(null);
-type Transaction = {
+export type Transaction = {
   id: string;
   type: "income" | "expense";
   desc: string;

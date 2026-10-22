@@ -1,6 +1,7 @@
 import { CATEGORIES } from "../constants/categories";
+import type { Transaction } from "../context/TransactionContext";
 
-function TransactionItem({ transaction }) {
+function TransactionItem({ transaction }: { transaction:Transaction}) {
   const category = CATEGORIES.find((c) => c.id === transaction.catId);
 
   const formattedAmount = Number(transaction.amount).toLocaleString("pt-BR", {
