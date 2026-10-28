@@ -4,23 +4,13 @@ import { useState } from "react";
 
 function Modal() {
   const { isModalOpen, setIsModalOpen, dispatch } = useTransactions();
-  const [type, setType] = useState("income");
+  const [type, setType] = useState<"income" | "expense">("income");
   const [desc, setDesc] = useState("");
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState<string>("");
   const [date, setDate] = useState("");
-  const [catId, setCatId] = useState(null);
-  const listCategories = CATEGORIES.map((category) => (
-    <button
-      className={`p-2 rounded-lg ${catId === category.id ? "bg-surface-hi text-t1" : "text-t2"}`}
-      key={category.id}
-      value={category.id}
-      onClick={(e) => setCatId(e.target.value)}
-    >
-      {category.name} {category.emoji}
-    </button>
-  ));
+  const [catId, setCatId] = useState<string | null>(null);
 
-  function handlesubmit(e) {
+  function handlesubmit(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
 
     const transaction = {
@@ -60,15 +50,13 @@ function Modal() {
 
         <div className="flex gap-2">
           <button
-            value="income"
-            onClick={(e) => setType(e.target.value)}
+            onClick={() => setType("income")}
             className={`flex-1 py-2 rounded-lg text-sm font-medium transition-colors ${type === "income" ? "bg-income text-bg" : "bg-surface-hi text-t2"}`}
           >
             Receita
           </button>
           <button
-            value="expense"
-            onClick={(e) => setType(e.target.value)}
+            onClick={() => setType("expense")}
             className={`flex-1 py-2 rounded-lg text-sm font-medium transition-colors ${type === "expense" ? "bg-expense text-bg" : "bg-surface-hi text-t2"}`}
           >
             Despesa
@@ -102,7 +90,7 @@ function Modal() {
               <button
                 key={category.id}
                 value={category.id}
-                onClick={(e) => setCatId(e.target.value)}
+                onClick={(e) => setCatId(e.currentTarget.value)}
                 className={`px-3 py-1 rounded-lg text-xs transition-colors ${catId === category.id ? "bg-surface-hi text-t1 ring-1 ring-accent" : "bg-surface-hi text-t2"}`}
               >
                 {category.emoji} {category.name}
