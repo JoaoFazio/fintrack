@@ -29,8 +29,10 @@ export default function Dashboard() {
   const chartData = Object.entries(
     transactions
       .filter((t) => t.type === "expense")
-      .reduce((acc, t) => {
-        if (acc[t.catId]) {
+      .reduce<Record<string, number>>((acc, t) => {
+        if (!t.catId) {
+          return acc;
+        } else if (acc[t.catId]) {
           acc[t.catId] += t.amount;
         } else {
           acc[t.catId] = t.amount;
@@ -43,7 +45,7 @@ export default function Dashboard() {
   });
 
   const monthlyData = Object.entries(
-    transactions.reduce((acc, t) => {
+    transactions.reduce<Record<string, {income: number ; expense: number}>>((acc, t) => {
       const month = t.date.slice(0, 7);
       if (!acc[month]) {
         acc[month] = { income: 0, expense: 0 };
