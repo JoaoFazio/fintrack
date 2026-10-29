@@ -12,6 +12,9 @@ function Modal() {
 
   function handlesubmit(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
+    if (type === "expense" && catId === null) {
+      return;
+    }
 
     const transaction = {
       id: Date.now().toString(),
