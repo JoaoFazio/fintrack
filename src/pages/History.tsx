@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Outlet } from "react-router-dom";
 import { CATEGORIES } from "../constants/categories";
 import TransactionItem from "../components/TransactionItem";
 import { useTransactions } from "../context/TransactionContext";
@@ -7,7 +6,7 @@ import { useTransactions } from "../context/TransactionContext";
 export default function History() {
   const [month, setMonth] = useState("");
   const [category, setCategory] = useState("");
-  const [type, setType] = useState("");
+  const [type, setType] = useState<"" | "income" | "expense">("");
   const listCategories = CATEGORIES.map((category) => (
     <option key={category.id} value={category.id}>
       {category.name}
@@ -45,22 +44,19 @@ export default function History() {
 
         <div className="flex gap-1 bg-surface-hi rounded-lg p-1">
           <button
-            value=""
-            onClick={(e) => setType(e.target.value)}
+            onClick={() => setType("")}
             className={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${type === "" ? "bg-surface text-t1" : "text-t2"}`}
           >
             Todos
           </button>
           <button
-            value="income"
-            onClick={(e) => setType(e.target.value)}
+            onClick={() => setType("income")}
             className={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${type === "income" ? "bg-surface text-income" : "text-t2"}`}
           >
             Receitas
           </button>
           <button
-            value="expense"
-            onClick={(e) => setType(e.target.value)}
+            onClick={() => setType("expense")}
             className={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${type === "expense" ? "bg-surface text-expense" : "text-t2"}`}
           >
             Despesas
