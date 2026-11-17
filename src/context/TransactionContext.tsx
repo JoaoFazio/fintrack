@@ -33,8 +33,11 @@ function isTransaction(item: unknown): item is Transaction {
   );
 }
 
-export function isTransactionList(value: unknown): value is Transaction[] {
-  return Array.isArray(value) && value.every(isTransaction);
+export function getTransactionList(value: unknown): Transaction[] | null {
+  if (!Array.isArray(value)) {
+    return null
+  }
+  return value.filter(isTransaction);
 }
 
 type TransactionContextType = {
@@ -65,7 +68,7 @@ export function TransactionProvider({ children }: { children: ReactNode }) {
   const [stored, setStored] = useLocalStorage<Transaction[]>(
     "transactions",
     [],
-    isTransactionList
+    getTransactionList
   );
   const [transactions, dispatch] = useReducer(transactionReducer, stored);
   const [isModalOpen, setIsModalOpen] = useState(false);

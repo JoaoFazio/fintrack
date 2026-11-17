@@ -3,15 +3,16 @@ import { useEffect, useState } from "react";
 export function useLocalStorage<T>(
   key: string,
   initialValue: T,
-  isValid: (item: unknown) => item is T,
+  parseStoredValue: (item: unknown) => T | null,
 ) {
   const [value, setValue] = useState<T>(() => {
     const stored = localStorage.getItem(key);
     if (stored) {
       try {
         const actualValue = JSON.parse(stored);
-        if (isValid(actualValue)) {
-          return actualValue;
+        const validatedList = parseStoredValue(actualValue);
+        if (validatedList !== null) {
+          return validatedList;
         } else return initialValue;
       } catch {
         return initialValue;
