@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { useTransactions } from "../context/TransactionContext";
+import { useTransactions } from "../context/useTransactions";
 
 function Sidebar() {
   const { setIsModalOpen } = useTransactions();
