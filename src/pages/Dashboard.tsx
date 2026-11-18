@@ -1,4 +1,4 @@
-import { useTransactions } from "../context/TransactionProvider";
+import { useTransactions } from "../context/useTransactions";
 import {
   PieChart,
   Pie,

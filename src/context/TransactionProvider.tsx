@@ -1,7 +1,6 @@
 import { useReducer, useState, type ReactNode } from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { useEffect } from "react";
-import { useContext } from "react";
 import {TransactionContext, type Transaction, type TransactionAction} from "./TransactionContext";
 
 
@@ -63,15 +62,4 @@ export function TransactionProvider({ children }: { children: ReactNode }) {
       {children}
     </TransactionContext.Provider>
   );
-}
-
-export function useTransactions() {
-  const usingTransaction = useContext(TransactionContext);
-
-  if (!usingTransaction) {
-    throw new Error(
-      "useTransaction must be used within the TransactionProvider.",
-    );
-  }
-  return usingTransaction;
 }

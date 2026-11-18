@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { CATEGORIES } from "../constants/categories";
 import TransactionItem from "../components/TransactionItem";
-import { useTransactions } from "../context/TransactionProvider";
+import { useTransactions } from "../context/useTransactions";
 
 export default function History() {
   const [month, setMonth] = useState("");
