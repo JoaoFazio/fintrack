@@ -1,4 +1,4 @@
-import { useTransactions } from "../context/TransactionContext";
+import { useTransactions } from "../context/TransactionProvider";
 import {
   PieChart,
   Pie,
@@ -45,18 +45,21 @@ export default function Dashboard() {
   });
 
   const monthlyData = Object.entries(
-    transactions.reduce<Record<string, {income: number ; expense: number}>>((acc, t) => {
-      const month = t.date.slice(0, 7);
-      if (!acc[month]) {
-        acc[month] = { income: 0, expense: 0 };
-      }
-      if (t.type === "income") {
-        acc[month].income += t.amount;
-      } else {
-        acc[month].expense += t.amount;
-      }
-      return acc;
-    }, {}),
+    transactions.reduce<Record<string, { income: number; expense: number }>>(
+      (acc, t) => {
+        const month = t.date.slice(0, 7);
+        if (!acc[month]) {
+          acc[month] = { income: 0, expense: 0 };
+        }
+        if (t.type === "income") {
+          acc[month].income += t.amount;
+        } else {
+          acc[month].expense += t.amount;
+        }
+        return acc;
+      },
+      {},
+    ),
   ).map(([month, values]) => ({ month, ...values }));
 
   const formattedBalance = Number(balance).toLocaleString("pt-BR", {

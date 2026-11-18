@@ -1,19 +1,10 @@
-import { createContext, useReducer, useState, type ReactNode } from "react";
+import { useReducer, useState, type ReactNode } from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { useEffect } from "react";
 import { useContext } from "react";
+import {TransactionContext, type Transaction, type TransactionAction} from "./TransactionContext";
 
-const TransactionContext = createContext<TransactionContextType | null>(
-  null,
-);
-export type Transaction = {
-  id: string;
-  type: "income" | "expense";
-  desc: string;
-  amount: number;
-  date: string;
-  catId: string | null;
-};
+
 
 //typeof item === "object" vem do javascript, eu nao escrevi object em lugar nenhum
 //e tem que colocar && !== null pq é a forma de corrigir o erro do javascript
@@ -39,17 +30,6 @@ function getTransactionList(value: unknown): Transaction[] | null {
   }
   return value.filter(isTransaction);
 }
-
-type TransactionContextType = {
-  transactions: Transaction[];
-  dispatch: React.ActionDispatch<[action: TransactionAction]>;
-  isModalOpen: boolean;
-  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-type TransactionAction =
-  | { type: "ADD_TRANSACTION"; payload: Transaction }
-  | { type: "DELETE_TRANSACTION"; payload: string };
 
 function transactionReducer(state: Transaction[], action: TransactionAction) {
   switch (action.type) {

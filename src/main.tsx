@@ -1,7 +1,7 @@
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App";
-import { TransactionProvider } from "./context/TransactionContext";
+import { TransactionProvider } from "./context/TransactionProvider";
 
 function bringRoot() {
   const root = document.getElementById("root");
