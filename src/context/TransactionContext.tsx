@@ -3,7 +3,7 @@ import { useLocalStorage } from "../hooks/useLocalStorage";
 import { useEffect } from "react";
 import { useContext } from "react";
 
-export const TransactionContext = createContext<TransactionContextType | null>(
+const TransactionContext = createContext<TransactionContextType | null>(
   null,
 );
 export type Transaction = {
@@ -33,7 +33,7 @@ function isTransaction(item: unknown): item is Transaction {
   );
 }
 
-export function getTransactionList(value: unknown): Transaction[] | null {
+function getTransactionList(value: unknown): Transaction[] | null {
   if (!Array.isArray(value)) {
     return null
   }
@@ -74,7 +74,7 @@ export function TransactionProvider({ children }: { children: ReactNode }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   useEffect(() => {
     setStored(transactions);
-  }, [transactions]);
+  }, [transactions, setStored]);
 
   return (
     <TransactionContext.Provider
